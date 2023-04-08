@@ -8,9 +8,11 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,6 +24,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.android.google_maps.databinding.ActivityMapsBinding;
@@ -69,11 +72,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.geography);
         Bitmap resizedBitmap = Bitmap.createScaledBitmap(originalBitmap, width, height, false);
 
-        // Add a marker in Sydney and move the camera
+        // Add a marker in GSP UGM and move the camera
         LatLng gsp = new LatLng(-7.7651543, 110.3666396);
         mMap.addMarker(new MarkerOptions().
                 position(gsp).
-                title("Marker in Sydney").
+                title("Marker in GSP UGM").
                 icon(BitmapDescriptorFactory.fromBitmap(resizedBitmap)));
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(gsp, 20));
