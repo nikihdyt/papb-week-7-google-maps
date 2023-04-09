@@ -39,6 +39,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
 
+    private static final String TAG = MapsActivity.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +73,22 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         int height = 100;
         Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.geography);
         Bitmap resizedBitmap = Bitmap.createScaledBitmap(originalBitmap, width, height, false);
+
+        // set maps style
+        try {
+            // Customise the styling of the base map using a JSON object defined
+            // in a raw resource file.
+            boolean success = googleMap.setMapStyle(
+                    MapStyleOptions.loadRawResourceStyle(
+                            this, R.raw.style_json));
+
+            if (!success) {
+                Log.e(TAG, "Style parsing failed.");
+            }
+        } catch (Resources.NotFoundException e) {
+            Log.e(TAG, "Can't find style. Error: ", e);
+        }
+
 
         // Add a marker in GSP UGM and move the camera
         LatLng gsp = new LatLng(-7.7651543, 110.3666396);
