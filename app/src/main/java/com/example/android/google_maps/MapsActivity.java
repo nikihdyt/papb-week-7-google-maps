@@ -58,8 +58,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // resize ukuran bitmap untuk marker
-        BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.geography);
+        // resize bitmap for marker
         int width = 100;
         int height = 100;
         Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.geography);
@@ -132,11 +131,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         latLng.latitude,
                         latLng.longitude);
 
+                // load custom marker image from resources
+                BitmapDescriptor icMarker = BitmapDescriptorFactory.fromResource(R.drawable.ic_marker);
+
                 // Add a marker for the user-created location. Add the snippet.
                 map.addMarker(new MarkerOptions()
                         .position(latLng)
                         .title("Dropped Pin")
-                        .snippet(snippet));
+                        .snippet(snippet)
+                        .icon(icMarker));
             }
         });
     }
@@ -145,10 +148,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         map.setOnPoiClickListener(new GoogleMap.OnPoiClickListener() {
             @Override
             public void onPoiClick(@NotNull PointOfInterest pointOfInterest) {
+                // load custom marker image from resources
+                BitmapDescriptor icMarker = BitmapDescriptorFactory.fromResource(R.drawable.ic_pin);
+
                 // Create a new marker for the POI that was clicked, and add it to the map.
                 Marker poiMarker = map.addMarker(new MarkerOptions()
                         .position(pointOfInterest.latLng)
-                        .title(pointOfInterest.name));
+                        .title(pointOfInterest.name)
+                        .icon(icMarker));
                 poiMarker.showInfoWindow();
             }
         });
